@@ -1,0 +1,303 @@
+import { useMemo, useRef } from 'react'
+import type { FC } from 'react'
+import classnames from 'classnames'
+import {
+  CalendarIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon
+} from '@heroicons/react/outline'
+import {
+  ChevronDoubleLeftIcon,
+  ChevronDoubleRightIcon,
+  XCircleIcon
+} from '@heroicons/react/solid'
+import { randomString, useObjectState, useOnClickOutside } from 'services'
+import dayjs from 'dayjs'
+import type { Dayjs } from 'dayjs'
+import { Portal } from 'components'
+
+interface Props {
+  value: string
+  onChange: (value: string) => void
+  format?: string
+}
+interface State {
+  isOpen: boolean
+  date: dayjs.Dayjs
+  stacks: ('month' | 'year' | 'decade')[]
+}
+
+const DatePicker: FC<Props> = ({ onChange, format = 'YYYY.MM.DD', value }) => {
+  const [{ isOpen, date, stacks }, setState, , resetState] =
+    useObjectState<State>({
+      isOpen: false,
+      date: dayjs(value || dayjs().format(format)),
+      stacks: []
+    })
+  const ref = useRef<HTMLDivElement>(null)
+  const targetRef = useRef<HTMLDivElement>(null)
+  const elementId = useMemo(() => randomString(), [])
+  useOnClickOutside(
+    targetRef,
+    () => resetState(['isOpen', 'date', 'stacks']),
+    elementId
+  )
+
+  const onYearClick = () => {
+    switch (stacks[0]) {
+      case undefined:
+        setState({ stacks: ['year'] })
+        break
+    }
+  }
+
+  const yearList: Dayjs[] = useMemo(() => {
+    const year = dayjs(date).format('YYYY')
+    return Array.from({ length: 12 }, (_, i) =>
+      dayjs(date).add(i - Number(year[3]) - 1, 'year')
+    )
+  }, [date])
+
+  const dayList: Dayjs[] = useMemo(() => {
+    const week = new Date(dayjs(date).format('YYYY-MM-01')).getDay()
+    return Array.from({ length: 42 }, (_, i) =>
+      i >= week
+        ? dayjs(dayjs(date).format(`YYYY-MM-${i - week + 1}`))
+        : dayjs(dayjs(date).format('YYYY-MM-01')).add(i - week, 'day')
+    )
+  }, [date])
+  return (
+    <>
+      <div
+        className="group relative inline-flex items-center rounded border border-gray-300 hover:border-gray-600"
+        ref={ref}
+        id={elementId}
+        onClick={() => setState({ isOpen: true })}
+      >
+        <input
+          readOnly
+          className="w-36 rounded border-none py-2 px-3 text-sm outline-none"
+          placeholder={format}
+          value={value ? dayjs(value).format(format) : ''}
+        />
+        {!!value && (
+          <XCircleIcon
+            onClick={(e) => {
+              e.stopPropagation()
+              onChange('')
+              setState({ isOpen: false })
+            }}
+            className="invisible absolute right-10 mr-2 h-5 w-5 cursor-pointer text-gray-300 group-hover:visible"
+          />
+        )}
+        <button className="border-l rounded-r border-gray-300 bg-white p-2 group-hover:border-gray-600">
+          <CalendarIcon className="h-5 w-5 text-gray-300 group-hover:text-gray-600" />
+        </button>
+      </div>
+      {isOpen && (
+        <Portal
+          role="presentation"
+          style={{
+            left: `${ref.current?.getBoundingClientRect().left || 0}px`,
+            top: `${
+              window.scrollY +
+              (ref.current?.getBoundingClientRect().top || 0) +
+              40
+            }px`,
+            position: 'absolute',
+            zIndex: '9999'
+          }}
+        >
+          <div
+            ref={targetRef}
+            className="w-64 select-none rounded bg-white drop-shadow-xl"
+          >
+            <div className="flex items-center justify-between border-b border-gray-300 px-2">
+              <div className="flex gap-2">
+                <button
+                  className="py-3"
+                  onClick={() =>
+                    setState({
+                      date: dayjs(date).add(
+                        stacks[0] === 'year' ? -10 : -1,
+                        'year'
+                      )
+                    })
+                  }
+                >
+                  <ChevronDoubleLeftIcon className="h-4 w-4 text-gray-400 hover:text-gray-800" />
+                </button>
+                {!stacks[0] && (
+                  <button
+                    className="py-3"
+                    onClick={() =>
+                      setState({ date: dayjs(date).add(-1, 'month') })
+                    }
+                  >
+                    <ChevronLeftIcon className="h-4 w-4 text-gray-400 hover:text-gray-800" />
+                  </button>
+                )}
+              </div>
+
+              <div className="flex gap-1 font-semibold">
+                <span
+                  className="cursor-pointer hover:text-blue-500"
+                  onClick={onYearClick}
+                >
+                  {stacks[0] === 'year'
+                    ? `${dayjs(date)
+                        .add(-Number(dayjs(date).format('YYYY')[0]), 'year')
+                        .format('YYYY')}-${dayjs(date)
+                        .add(10 - Number(dayjs(date).format('YYYY')[0]), 'year')
+                        .format('YYYY')}`
+                    : dayjs(date).format('YYYY')}
+                </span>
+                {!stacks[0] && (
+                  <span
+                    className="cursor-pointer hover:text-blue-500"
+                    onClick={() =>
+                      setState({
+                        stacks: ['month', ...stacks]
+                      })
+                    }
+                  >
+                    {dayjs(date).format('MM')}
+                  </span>
+                )}
+              </div>
+
+              <div className="flex gap-2">
+                {!stacks[0] && (
+                  <button
+                    className="py-3"
+                    onClick={() =>
+                      setState({ date: dayjs(date).add(1, 'month') })
+                    }
+                  >
+                    <ChevronRightIcon className="h-4 w-4 text-gray-400 hover:text-gray-800" />
+                  </button>
+                )}
+                <button
+                  className="py-3"
+                  onClick={() =>
+                    setState({
+                      date: dayjs(date).add(
+                        stacks[0] === 'year' ? 10 : 1,
+                        'year'
+                      )
+                    })
+                  }
+                >
+                  <ChevronDoubleRightIcon className="h-4 w-4 text-gray-400 hover:text-gray-800" />
+                </button>
+              </div>
+            </div>
+
+            {!stacks[0] && (
+              <>
+                <div className="grid grid-cols-7 gap-3 p-2 text-center">
+                  {['일', '월', '화', '수', '목', '금', '토'].map(
+                    (week, key) => (
+                      <div key={key}>{week}</div>
+                    )
+                  )}
+                  {dayList.map((day, key) => (
+                    <div
+                      key={key}
+                      onClick={() => {
+                        setState({ isOpen: false })
+                        onChange(dayjs(day).format(format))
+                      }}
+                      className={classnames(
+                        'flex h-6 w-6 cursor-pointer items-center justify-center rounded',
+                        !!value && dayjs(value).isSame(dayjs(day))
+                          ? 'bg-blue-500 text-white'
+                          : 'hover:bg-gray-200',
+                        {
+                          'text-gray-400':
+                            dayjs(day).format('MM') !==
+                            dayjs(date).format('MM'),
+                          'rounded border border-blue-500':
+                            dayjs(day).format('YYYY-MM-DD') ===
+                            dayjs().format('YYYY-MM-DD')
+                        }
+                      )}
+                    >
+                      {dayjs(day).format('D')}
+                    </div>
+                  ))}
+                </div>
+
+                <div className="flex h-10 items-center justify-center border-t border-gray-300 text-sm text-gray-400">
+                  <button
+                    className="hover:text-blue-400"
+                    onClick={() => {
+                      setState({ isOpen: false })
+                      onChange(dayjs().format(format))
+                    }}
+                  >
+                    오늘
+                  </button>
+                </div>
+              </>
+            )}
+
+            {stacks[0] === 'year' && (
+              <div className="grid grid-cols-3 gap-4 px-2 py-4">
+                {yearList.map((item, key) => (
+                  <div
+                    key={key}
+                    className={classnames(
+                      'flex h-6 cursor-pointer items-center justify-center rounded text-sm',
+                      !!value &&
+                        dayjs(value).format('YYYY') ===
+                          dayjs(item).format('YYYY')
+                        ? 'bg-blue-500 text-white'
+                        : 'first:text-gray-400 last:text-gray-400 hover:bg-gray-200'
+                    )}
+                    onClick={() =>
+                      setState({
+                        stacks: stacks.slice(1),
+                        ...(stacks.length === 1 ? { date: dayjs(item) } : {})
+                      })
+                    }
+                  >
+                    {dayjs(item).format('YYYY')}
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {stacks[0] === 'month' && (
+              <div className="grid grid-cols-3 gap-4 px-2 py-4">
+                {Array.from({ length: 12 }, (_, i) => i + 1).map(
+                  (item, key) => (
+                    <div
+                      key={key}
+                      className={classnames(
+                        'grid h-6 cursor-pointer place-items-center rounded text-sm',
+                        dayjs(value).format('M') === String(key + 1)
+                          ? 'bg-blue-500 text-white'
+                          : 'hover:bg-gray-200'
+                      )}
+                      onClick={() =>
+                        setState({
+                          date: dayjs(dayjs(date).format(`YYYY-${key + 1}-DD`)),
+                          stacks: stacks.slice(1)
+                        })
+                      }
+                    >
+                      {item}월
+                    </div>
+                  )
+                )}
+              </div>
+            )}
+          </div>
+        </Portal>
+      )}
+    </>
+  )
+}
+
+export default DatePicker
