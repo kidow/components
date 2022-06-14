@@ -14,9 +14,9 @@ const Backdrop: FC<Props> = ({ loading }) => {
   if (!loading) return null
   return (
     <>
-      <div className="fixed inset-0 bg-black opacity-30" />
-      <span className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <Spinner className="h-10 w-10" />
+      <div className="fixed inset-0 bg-black cursor-progress opacity-30" />
+      <span className="fixed -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 cursor-progress">
+        <Spinner className="w-10 h-10" />
       </span>
     </>
   )
