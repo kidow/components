@@ -23,6 +23,7 @@ export interface Props
   fullWidth?: boolean
   info?: ReactNode
   placeholder?: string
+  float?: boolean
 }
 
 const Input: FC<Props> = ({
@@ -35,7 +36,7 @@ const Input: FC<Props> = ({
   error,
   fullWidth = false,
   info,
-  placeholder,
+  float = true,
   ...props
 }) => {
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -56,7 +57,7 @@ const Input: FC<Props> = ({
           !!error && isBaseWord ? 'border-red-500' : 'border-gray-300',
           {
             'w-full': fullWidth,
-            relative: !!placeholder,
+            relative: !!props.placeholder,
             'px-1': isBaseWord && size === 'xs',
             'px-2': isBaseWord && size === 'sm',
             'px-3': isBaseWord && size === 'md',
@@ -86,8 +87,9 @@ const Input: FC<Props> = ({
               'px-4': !isBaseWord && size === 'lg',
               'text-right': align === 'right',
               'w-full': fullWidth,
-              peer: !!placeholder,
-              'placeholder-transparent': !!placeholder || !!prefix
+              peer: !!props.placeholder && float,
+              'placeholder-transparent':
+                (!!props.placeholder || !!prefix) && float
             },
             !!error
               ? 'border-red-500'
@@ -97,7 +99,7 @@ const Input: FC<Props> = ({
           onKeyDown={onKeyDown}
           spellCheck={false}
         />
-        {!!placeholder && (
+        {!!props.placeholder && float && (
           <label
             htmlFor={props.id || elementId}
             className={classnames(
@@ -116,7 +118,7 @@ const Input: FC<Props> = ({
               }
             )}
           >
-            {placeholder}
+            {props.placeholder}
           </label>
         )}
         {suffix}
@@ -125,7 +127,7 @@ const Input: FC<Props> = ({
         <div
           className={classnames(
             'mt-1 text-xs',
-            !!error ? 'text-red-500' : !!info ? 'text-gray-400' : ''
+            !!error ? 'text-red-500' : !!info ? 'text-gray-400' : undefined
           )}
         >
           {error || info}

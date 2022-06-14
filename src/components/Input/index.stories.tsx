@@ -31,6 +31,9 @@ export default {
     placeholder: {
       control: { type: 'text' },
       defaultValue: '플레이스홀더'
+    },
+    float: {
+      control: { type: 'boolean' }
     }
   }
 } as ComponentMeta<typeof Component>
