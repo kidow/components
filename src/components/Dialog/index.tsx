@@ -28,6 +28,7 @@ interface Props {
     | 'max-w-md'
     | 'max-w-sm'
     | 'max-w-xs'
+  children?: ReactNode
 }
 
 const Dialog = forwardRef<HTMLDialogElement, Props>(
@@ -88,6 +89,9 @@ const Dialog = forwardRef<HTMLDialogElement, Props>(
         <div className={classnames({ 'py-6 px-7': padding })}>
           {props.children}
         </div>
+        {!!footer && (
+          <footer className="border-t border-neutral-200 p-4">{footer}</footer>
+        )}
       </dialog>
     )
   }
