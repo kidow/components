@@ -2,7 +2,7 @@ import { Children, cloneElement, useRef, useEffect, useMemo } from 'react'
 import type { ReactElement, MouseEvent, ReactNode, FC } from 'react'
 import classnames from 'classnames'
 import { throttle, useObjectState } from 'services'
-import { Portal } from 'components'
+import { createPortal } from 'react-dom'
 
 export interface Props {
   content: ReactNode
@@ -112,9 +112,10 @@ const Tooltip: FC<Props> = ({
   return (
     <>
       {trigger}
-      {isOpen && (
-        <Portal role="tooltip">
+      {isOpen &&
+        createPortal(
           <div
+            role="tooltip"
             ref={tooltipRef}
             className={classnames(
               'fixed z-[9999] rounded',
@@ -200,9 +201,9 @@ const Tooltip: FC<Props> = ({
             style={{ left, top }}
           >
             {content}
-          </div>
-        </Portal>
-      )}
+          </div>,
+          document.body
+        )}
     </>
   )
 }

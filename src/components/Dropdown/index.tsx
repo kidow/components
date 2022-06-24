@@ -1,7 +1,7 @@
 import { useRef, useMemo } from 'react'
 import type { FC } from 'react'
-import { Portal } from 'components'
 import { useObjectState, useOnClickOutside, randomString } from 'services'
+import { createPortal } from 'react-dom'
 
 interface Props {
   list: string[]
@@ -31,43 +31,45 @@ const Dropdown: FC<Props> = ({ label = 'Dropdown', list, onClick }) => {
       >
         {label}
       </button>
-      {isOpen && (
-        <Portal
-          style={{
-            left: `${ref.current?.getBoundingClientRect().left || 0}px`,
-            top: `${
-              window.scrollY +
-              (ref.current?.getBoundingClientRect().top || 0) +
-              40
-            }px`,
-            position: 'absolute',
-            zIndex: '9999',
-            minWidth: `${ref.current?.getBoundingClientRect().width || 0}px`
-          }}
-        >
-          <ul
-            className="z-10 rounded-md bg-gray-50 p-1 text-gray-700 shadow-xl"
-            role="menu"
-            tabIndex={0}
-            ref={targetRef}
+      {isOpen &&
+        createPortal(
+          <div
+            style={{
+              left: `${ref.current?.getBoundingClientRect().left || 0}px`,
+              top: `${
+                window.scrollY +
+                (ref.current?.getBoundingClientRect().top || 0) +
+                40
+              }px`,
+              position: 'absolute',
+              zIndex: '9999',
+              minWidth: `${ref.current?.getBoundingClientRect().width || 0}px`
+            }}
           >
-            {list.map((item, key) => (
-              <li
-                className="cursor-pointer rounded-md p-2 hover:bg-gray-100"
-                role="menuitem"
-                tabIndex={-1}
-                key={key}
-                onClick={() => {
-                  onClick(key)
-                  setState({ isOpen: false })
-                }}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </Portal>
-      )}
+            <ul
+              className="z-10 rounded-md bg-gray-50 p-1 text-gray-700 shadow-xl"
+              role="menu"
+              tabIndex={0}
+              ref={targetRef}
+            >
+              {list.map((item, key) => (
+                <li
+                  className="cursor-pointer rounded-md p-2 hover:bg-gray-100"
+                  role="menuitem"
+                  tabIndex={-1}
+                  key={key}
+                  onClick={() => {
+                    onClick(key)
+                    setState({ isOpen: false })
+                  }}
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>,
+          document.body
+        )}
     </>
   )
 }
