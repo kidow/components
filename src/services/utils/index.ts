@@ -1,3 +1,5 @@
+import { Event, EventListener } from 'services'
+
 export const randomString = () => Math.random().toString(36).slice(2)
 
 export function throttle(func: Function, wait: number) {
@@ -23,3 +25,30 @@ export const priceFormat = (value?: string | number): string => {
 
 export const twoDigitsNumber = (digit: number): string =>
   digit < 10 ? `0${digit}` : String(digit)
+
+export const toast = {
+  success: (message: string, options?: Omit<NToast.Emit, 'message' | 'type'>) =>
+    EventListener.emit<NToast.Emit>(Event.Toast, {
+      message,
+      type: 'success',
+      position: options?.position || 'top-right'
+    }),
+  info: (message: string, options?: Omit<NToast.Emit, 'message' | 'type'>) =>
+    EventListener.emit<NToast.Emit>(Event.Toast, {
+      message,
+      type: 'info',
+      position: options?.position || 'top-right'
+    }),
+  warn: (message: string, options?: Omit<NToast.Emit, 'message' | 'type'>) =>
+    EventListener.emit<NToast.Emit>(Event.Toast, {
+      message,
+      type: 'warn',
+      position: options?.position || 'top-right'
+    }),
+  error: (message: string, options?: Omit<NToast.Emit, 'message' | 'type'>) =>
+    EventListener.emit<NToast.Emit>(Event.Toast, {
+      message,
+      type: 'error',
+      position: options?.position || 'top-right'
+    })
+}
