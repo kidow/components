@@ -3,14 +3,17 @@ import type { FC, ReactNode } from 'react'
 import { Toast } from 'components'
 import { EventListener, randomString, useObjectState } from 'services'
 
+enum Position {
+  'top-left',
+  'top-center',
+  'top-right',
+  'bottom-left',
+  'bottom-center',
+  'bottom-right'
+}
+
 export interface Props {
-  position?:
-    | 'top-left'
-    | 'top-center'
-    | 'top-right'
-    | 'bottom-left'
-    | 'bottom-center'
-    | 'bottom-right'
+  position?: keyof typeof Position
   autoClose?: number | false
 }
 interface State {
@@ -62,12 +65,9 @@ const ToastContainer: FC<Props> = ({
   if (!list.length) return null
   return (
     <>
-      {render('top-left')}
-      {render('top-center')}
-      {render('top-right')}
-      {render('bottom-left')}
-      {render('bottom-center')}
-      {render('bottom-right')}
+      {Object.entries(Position).map(([name, value]) =>
+        render(name as keyof typeof Position)
+      )}
     </>
   )
 }
