@@ -139,7 +139,7 @@ const TimeRangePicker: FC<Props> = ({
                 >
                   <div
                     className={classnames({
-                      'font-spoqa-bold': tab === 'start'
+                      'font-bold': tab === 'start'
                     })}
                   >
                     <div>시작</div>
@@ -176,7 +176,7 @@ const TimeRangePicker: FC<Props> = ({
                 >
                   <div
                     className={classnames({
-                      'font-spoqa-bold': tab === 'end'
+                      'font-bold': tab === 'end'
                     })}
                   >
                     <div>종료</div>

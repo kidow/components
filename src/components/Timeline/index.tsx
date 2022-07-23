@@ -24,13 +24,13 @@ const Timeline: FC<Props> = ({ list }) => {
           )}
         >
           {!!item.tag && (
-            <div className="font-spoqa-bold text-primary whitespace-nowrap">
+            <div className="text-primary whitespace-nowrap font-bold">
               {item.tag}
             </div>
           )}
           <div>
             <h2
-              className={classNames('font-spoqa-bold', {
+              className={classNames('font-bold', {
                 'mb-4': !!item.content
               })}
             >
