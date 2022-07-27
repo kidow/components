@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { throttle, useObjectState } from 'services'
 import { createPortal } from 'react-dom'
 
-export interface Props {
+export interface Props extends ReactProps {
   content: ReactNode
   position: 'top' | 'right' | 'bottom' | 'left'
   border?: boolean

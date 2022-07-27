@@ -2,7 +2,7 @@ import { useEffect, useMemo } from 'react'
 import type { FC, AriaRole, AriaAttributes } from 'react'
 import { createPortal } from 'react-dom'
 
-export interface Props extends AriaAttributes {
+export interface Props extends AriaAttributes, ReactProps {
   role?: AriaRole
   style?: Partial<CSSStyleDeclaration>
 }

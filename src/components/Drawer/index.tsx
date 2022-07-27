@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { XIcon } from '@heroicons/react/outline'
 import { createPortal } from 'react-dom'
 
-interface Props {
+interface Props extends ReactProps {
   isOpen: boolean
   position: 'top' | 'right' | 'bottom' | 'left'
   onClose: () => void

@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-export interface Props {}
+export interface Props extends ReactProps {}
 
 const Badge: FC<Props> = ({ children }) => {
   return (

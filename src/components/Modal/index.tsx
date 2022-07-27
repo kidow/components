@@ -3,7 +3,7 @@ import { XIcon } from '@heroicons/react/solid'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
 
-interface Props {
+interface Props extends ReactProps {
   isOpen: boolean
   onClose: () => void
   title?: string

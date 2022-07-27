@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 
-export interface Props {}
+export interface Props extends ReactProps {}
 interface State {}
 
 const Masonry: FC<Props> = ({ children }) => {

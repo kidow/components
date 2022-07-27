@@ -1,3 +1,7 @@
+interface ReactProps {
+  children?: ReactNode
+}
+
 namespace NToast {
   interface State {
     id: string

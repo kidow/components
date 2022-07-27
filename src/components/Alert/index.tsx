@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import { ExclamationCircleIcon, XIcon } from '@heroicons/react/outline'
 import { useObjectState } from 'services'
 
-export interface Props {
+export interface Props extends ReactProps {
   type: 'success' | 'info' | 'warn' | 'error'
   close?: boolean
   message: string
