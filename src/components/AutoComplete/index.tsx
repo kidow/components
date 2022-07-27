@@ -1,7 +1,6 @@
-import { useMemo } from 'react'
+import { useId } from 'react'
 import type { FC, OptionHTMLAttributes, ComponentProps } from 'react'
 import { Input } from 'components'
-import { randomString } from 'services'
 
 interface Props extends ComponentProps<typeof Input> {
   options: Array<OptionHTMLAttributes<HTMLOptionElement>['value']>
@@ -9,7 +8,7 @@ interface Props extends ComponentProps<typeof Input> {
 }
 
 const Autocomplete: FC<Props> = ({ options, ...props }) => {
-  const id = useMemo(() => randomString(), [])
+  const id = useId()
   return (
     <>
       <Input {...props} list={props.id || id} />

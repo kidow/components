@@ -1,6 +1,6 @@
-import { useRef, useMemo } from 'react'
+import { useRef, useMemo, useId } from 'react'
 import type { FC } from 'react'
-import { useObjectState, useOnClickOutside, randomString } from 'services'
+import { useObjectState, useOnClickOutside } from 'services'
 import { createPortal } from 'react-dom'
 
 interface Props {
@@ -18,14 +18,14 @@ const Dropdown: FC<Props> = ({ label = 'Dropdown', list, onClick }) => {
   })
   const ref = useRef<HTMLButtonElement>(null)
   const targetRef = useRef<HTMLUListElement>(null)
-  const elementId = useMemo(() => randomString(), [])
+  const id = useId()
 
-  useOnClickOutside(targetRef, () => setState({ isOpen: false }), elementId)
+  useOnClickOutside(targetRef, () => setState({ isOpen: false }), id)
   return (
     <>
       <button
         onClick={() => setState({ isOpen: !isOpen })}
-        id={elementId}
+        id={id}
         ref={ref}
         className="inline-flex items-center rounded-md px-4 py-2 text-sm text-gray-700 after:ml-2 after:block after:h-1.5 after:w-1.5 after:rotate-45 after:border-b after:border-r after:border-gray-700 after:bg-transparent after:content-[''] hover:bg-gray-50"
       >

@@ -1,7 +1,7 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useId } from 'react'
 import type { FC, ReactNode } from 'react'
 import { Toast } from 'components'
-import { EventListener, randomString, useObjectState } from 'services'
+import { EventListener, useObjectState } from 'services'
 
 enum Position {
   'top-left',
@@ -34,7 +34,7 @@ const ToastContainer: FC<Props> = ({
           : [
               ...list,
               {
-                id: randomString(),
+                id: useId(),
                 message: detail.message,
                 type: detail.type,
                 position: detail.position || position,

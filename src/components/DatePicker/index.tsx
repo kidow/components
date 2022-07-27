@@ -1,4 +1,4 @@
-import { useMemo, useRef } from 'react'
+import { useMemo, useRef, useId } from 'react'
 import type { FC } from 'react'
 import classnames from 'classnames'
 import {
@@ -11,7 +11,7 @@ import {
   ChevronDoubleRightIcon,
   XCircleIcon
 } from '@heroicons/react/solid'
-import { randomString, useObjectState, useOnClickOutside } from 'services'
+import { useObjectState, useOnClickOutside } from 'services'
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
 import { createPortal } from 'react-dom'
@@ -36,11 +36,11 @@ const DatePicker: FC<Props> = ({ onChange, format = 'YYYY.MM.DD', value }) => {
     })
   const ref = useRef<HTMLDivElement>(null)
   const targetRef = useRef<HTMLDivElement>(null)
-  const elementId = useMemo(() => randomString(), [])
+  const id = useId()
   useOnClickOutside(
     targetRef,
     () => resetState(['isOpen', 'date', 'stacks']),
-    elementId
+    id
   )
 
   const onYearClick = () => {
@@ -71,7 +71,7 @@ const DatePicker: FC<Props> = ({ onChange, format = 'YYYY.MM.DD', value }) => {
       <div
         className="group relative inline-flex items-center rounded border border-gray-300 hover:border-gray-600"
         ref={ref}
-        id={elementId}
+        id={id}
         onClick={() => setState({ isOpen: true })}
       >
         <input

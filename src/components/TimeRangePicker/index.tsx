@@ -1,14 +1,9 @@
 import { XCircleIcon } from '@heroicons/react/solid'
 import { Button } from 'components'
 import classnames from 'classnames'
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useId } from 'react'
 import type { FC, ReactNode } from 'react'
-import {
-  randomString,
-  twoDigitsNumber,
-  useObjectState,
-  useOnClickOutside
-} from 'services'
+import { twoDigitsNumber, useObjectState, useOnClickOutside } from 'services'
 import dayjs from 'dayjs'
 import isSameOrBefore from 'dayjs/plugin/isSameOrBefore'
 import { createPortal } from 'react-dom'
@@ -51,7 +46,7 @@ const TimeRangePicker: FC<Props> = ({
   const hourRef = useRef<HTMLDivElement>(null)
   const minuteRef = useRef<HTMLDivElement>(null)
   const targetRef = useRef<HTMLDivElement>(null)
-  const elementId = randomString()
+  const id = useId()
 
   const onApply = () => {
     if (
@@ -66,7 +61,7 @@ const TimeRangePicker: FC<Props> = ({
     setState({ isOpen: false })
   }
 
-  useOnClickOutside(targetRef, () => setState({ isOpen: false }), elementId)
+  useOnClickOutside(targetRef, () => setState({ isOpen: false }), id)
   useEffect(() => {
     if (!isOpen) return
     if (hourRef.current)
@@ -80,7 +75,7 @@ const TimeRangePicker: FC<Props> = ({
     <div className="inline-block">
       <div
         ref={ref}
-        id={elementId}
+        id={id}
         className={classnames(
           'flex cursor-pointer items-center justify-between gap-2 rounded border border-gray-200 bg-white px-2 py-1',
           !!error ? 'border-red-500' : 'hover:border-gray-500'

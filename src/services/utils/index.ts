@@ -1,7 +1,5 @@
 import { Event, EventListener } from 'services'
 
-export const randomString = () => Math.random().toString(36).slice(2)
-
 export function throttle(func: Function, wait: number) {
   let waiting = false
   return function () {

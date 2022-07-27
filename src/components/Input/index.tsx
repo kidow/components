@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useId, useMemo } from 'react'
 import type {
   FC,
   ReactNode,
@@ -7,7 +7,6 @@ import type {
   KeyboardEvent
 } from 'react'
 import classnames from 'classnames'
-import { randomString } from 'services'
 
 export interface Props
   extends Omit<
@@ -22,7 +21,6 @@ export interface Props
   error?: ReactNode
   fullWidth?: boolean
   info?: ReactNode
-  placeholder?: string
   float?: boolean
 }
 
@@ -37,12 +35,13 @@ const Input: FC<Props> = ({
   fullWidth = false,
   info,
   float = true,
+  placeholder,
   ...props
 }) => {
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter' && !!onEnter) onEnter()
   }
-  const elementId: string = useMemo(() => randomString(), [])
+  const id = useId()
   const isBaseWord: boolean = useMemo(
     () => !!prefix || !!suffix,
     [prefix, suffix]
@@ -57,7 +56,7 @@ const Input: FC<Props> = ({
           !!error && isBaseWord ? 'border-red-500' : 'border-gray-300',
           {
             'w-full': fullWidth,
-            relative: !!props.placeholder,
+            relative: !!placeholder,
             'px-1': isBaseWord && size === 'xs',
             'px-2': isBaseWord && size === 'sm',
             'px-3': isBaseWord && size === 'md',
@@ -70,12 +69,12 @@ const Input: FC<Props> = ({
         {prefix}
         <input
           {...props}
-          id={props.id || elementId}
+          id={props.id || id}
           className={classnames(
             'bg-white focus:outline-none',
             isBaseWord
               ? 'mx-1 w-full flex-1 border-0'
-              : 'border-gray-500border block border border-gray-500',
+              : 'block border border-gray-500',
             {
               'rounded-sm text-xs': size === 'xs',
               'p-1': !isBaseWord && size === 'xs',
@@ -87,9 +86,8 @@ const Input: FC<Props> = ({
               'px-4': !isBaseWord && size === 'lg',
               'text-right': align === 'right',
               'w-full': fullWidth,
-              peer: !!props.placeholder && float,
-              'placeholder-transparent':
-                (!!props.placeholder || !!prefix) && float
+              peer: !!placeholder && float,
+              'placeholder-transparent': (!!placeholder || !!prefix) && float
             },
             !!error
               ? 'border-red-500'
@@ -98,10 +96,11 @@ const Input: FC<Props> = ({
           )}
           onKeyDown={onKeyDown}
           spellCheck={false}
+          placeholder={placeholder}
         />
-        {!!props.placeholder && float && (
+        {!!placeholder && float && (
           <label
-            htmlFor={props.id || elementId}
+            htmlFor={props.id || id}
             className={classnames(
               'absolute -top-6 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-gray-600 transition-all peer-placeholder-shown:text-gray-400 peer-empty:left-3 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-gray-600',
               !!props.value ? 'left-0' : 'left-3',
@@ -118,20 +117,20 @@ const Input: FC<Props> = ({
               }
             )}
           >
-            {props.placeholder}
+            {placeholder}
           </label>
         )}
         {suffix}
       </div>
       {(!!error || !!info) && (
-        <div
+        <p
           className={classnames(
             'mt-1 text-xs',
             !!error ? 'text-red-500' : !!info ? 'text-gray-400' : undefined
           )}
         >
           {error || info}
-        </div>
+        </p>
       )}
     </div>
   )
