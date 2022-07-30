@@ -2,7 +2,7 @@ import Component from '.'
 import type { ComponentMeta, ComponentStory } from '@storybook/react'
 
 export default {
-  title: 'Data Display',
+  title: 'Data Display/Card',
   component: Component,
   argTypes: {
     title: {
@@ -28,6 +28,6 @@ export default {
   }
 } as ComponentMeta<typeof Component>
 
-export const Card: ComponentStory<typeof Component> = ({ ...props }) => (
+export const Default: ComponentStory<typeof Component> = ({ ...props }) => (
   <Component {...props}>children</Component>
 )

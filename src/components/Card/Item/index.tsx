@@ -9,7 +9,7 @@ export interface Props extends ReactProps {
 }
 interface State {}
 
-const FormItem: FC<Props> = ({
+const CardItem: FC<Props> = ({
   children,
   label,
   required,
@@ -32,4 +32,4 @@ const FormItem: FC<Props> = ({
   )
 }
 
-export default FormItem
+export default CardItem
