@@ -3,7 +3,7 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react'
 import Card from '..'
 
 export default {
-  title: 'Data Display/Form',
+  title: 'Data Display/Card',
   component: Component,
   argTypes: {
     label: {
@@ -20,13 +20,13 @@ export default {
     },
     plain: {
       control: { type: 'boolean' },
-      defaultValue: false
+      defaultValue: true
     }
   }
 } as ComponentMeta<typeof Component>
 
 export const Item: ComponentStory<typeof Component> = ({ ...props }) => (
   <Card title="타이틀">
-    <Component {...props} />
+    <Component {...props}>카드 아이템</Component>
   </Card>
 )

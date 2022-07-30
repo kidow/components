@@ -29,5 +29,5 @@ export default {
 } as ComponentMeta<typeof Component>
 
 export const Card: ComponentStory<typeof Component> = ({ ...props }) => (
-  <Component {...props} />
+  <Component {...props}>children</Component>
 )
