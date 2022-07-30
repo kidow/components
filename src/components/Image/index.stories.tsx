@@ -12,6 +12,6 @@ export default {
   }
 } as ComponentMeta<typeof Component>
 
-export const Input: ComponentStory<typeof Component> = ({ ...props }) => (
+export const Image: ComponentStory<typeof Component> = ({ ...props }) => (
   <Component {...props} />
 )
