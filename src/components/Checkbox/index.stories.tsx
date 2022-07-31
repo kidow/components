@@ -7,14 +7,14 @@ export default {
   argTypes: {
     checked: {
       control: { type: 'boolean' },
-      defaultValue: false
+      defaultValue: true
     },
     onChange: {
       action: 'onChange'
     },
     label: {
       control: { type: 'text' },
-      defaultValue: 'Label'
+      defaultValue: '라벨'
     },
     indeterminate: {
       control: { type: 'boolean' },
@@ -23,6 +23,11 @@ export default {
     disabled: {
       control: { type: 'boolean' },
       defaultValue: false
+    },
+    size: {
+      control: { type: 'radio' },
+      options: ['sm', 'md', 'lg', 'xl'],
+      defaultValue: 'md'
     }
   }
 } as ComponentMeta<typeof Component>
