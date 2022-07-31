@@ -21,14 +21,16 @@ const Checkbox: FC<Props> = ({
 }) => {
   return (
     <label
-      className={classnames('cursor-pointer', {
-        'inline-flex items-center': !!label,
-        'gap-1': size === 'sm',
-        'gap-1.5': size === 'md',
-        'gap-2': size === 'lg',
-        'gap-2.5': size === 'xl',
-        'cursor-not-allowed': disabled
-      })}
+      className={classnames(
+        disabled ? 'cursor-not-allowed' : 'cursor-pointer',
+        {
+          'inline-flex items-center': !!label,
+          'gap-1': size === 'sm',
+          'gap-1.5': size === 'md',
+          'gap-2': size === 'lg',
+          'gap-2.5': size === 'xl'
+        }
+      )}
     >
       <input
         type="checkbox"
