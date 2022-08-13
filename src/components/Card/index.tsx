@@ -12,12 +12,9 @@ export interface Props extends ReactProps {
   padding?: boolean
   className?: Argument
 }
-interface ICard extends FC<Props> {
-  Item: typeof CardItem
-}
 interface State {}
 
-const Card: ICard = ({
+const Card: FC<Props> = ({
   children,
   title,
   caption,
@@ -51,6 +48,4 @@ const Card: ICard = ({
   )
 }
 
-Card.Item = CardItem
-
-export default Card
+export default Object.assign(Card, { Item: CardItem })

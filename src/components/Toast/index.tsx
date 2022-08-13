@@ -8,6 +8,7 @@ import {
   InformationCircleIcon,
   XIcon
 } from '@heroicons/react/solid'
+
 import ToastContainer from './Container'
 import ToastWrapper from './Wrapper'
 import ToastProgress from './Progress'
@@ -20,13 +21,9 @@ export interface Props {
   autoClose?: number | false
   pauseOnHover?: boolean
 }
-interface IToast extends FC<Props> {
-  Container: typeof ToastContainer
-  Wrapper: typeof ToastWrapper
-}
 interface State {}
 
-const Toast: IToast = ({
+const Toast: FC<Props> = ({
   id,
   message,
   type,
@@ -94,7 +91,7 @@ const Toast: IToast = ({
   )
 }
 
-Toast.Container = ToastContainer
-Toast.Wrapper = ToastWrapper
-
-export default Toast
+export default Object.assign(Toast, {
+  Container: ToastContainer,
+  Wrapper: ToastWrapper
+})
