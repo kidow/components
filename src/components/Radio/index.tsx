@@ -1,63 +1,67 @@
-import type { FC, ReactNode } from 'react'
 import classnames from 'classnames'
 
-export interface Props {
+export interface Props<T> {
+  value: T
+  onChange: (value: T) => void
   options: Array<{
-    name: ReactNode
-    value: any
+    name: string
+    description?: string
+    value: T
     disabled?: boolean
   }>
-  onChange: (value: any) => void
-  value?: any
   direction?: 'horizontal' | 'vertical'
-  initial?: boolean
-  disabled?: boolean
+  card?: boolean
 }
+interface State {}
 
-const Radio: FC<Props> = ({
-  options,
-  onChange,
+function Radio<T>({
   value,
+  onChange,
+  options,
   direction = 'horizontal',
-  initial = false,
-  disabled = false
-}) => {
+  card = false
+}: Props<T>) {
   return (
     <div
-      className={classnames('flex flex-wrap gap-3', {
+      className={classnames('flex flex-wrap gap-2', {
         'flex-col': direction === 'vertical'
       })}
     >
-      {initial && (
-        <label className="flex cursor-pointer items-center">
-          <input
-            type="radio"
-            disabled={disabled}
-            onChange={() => onChange('')}
-            checked={value === ''}
-          />
-          <span className="ml-1 text-sm">전체</span>
-        </label>
-      )}
-      {options.map((item, index) => (
+      {options.map((item, key) => (
         <label
-          key={index}
-          className={classnames(
-            'flex items-center',
-            disabled || item.disabled
-              ? 'cursor-not-allowed opacity-50'
-              : 'cursor-pointer'
-          )}
+          key={key}
+          className={classnames('relative cursor-pointer', {
+            'flex gap-8 rounded border pt-1.5 pb-2 pl-1 pr-4 hover:bg-slate-50':
+              card,
+            'border-blue-500': card && value === item.value
+          })}
         >
           <input
             type="radio"
+            className={classnames(
+              'cursor-pointer appearance-none before:absolute before:rounded-full before:border before:p-2 disabled:cursor-not-allowed',
+              card
+                ? 'before:left-2 before:top-2'
+                : 'before:left-0 before:top-[3px]',
+              {
+                'after:absolute after:h-2.5 after:w-2.5 after:rounded-full after:bg-blue-500':
+                  value === item.value,
+                'after:left-3 after:top-3': card && value === item.value,
+                'after:left-1 after:top-[7px]': !card && value === item.value
+              }
+            )}
             checked={value === item.value}
             onChange={() => onChange(item.value)}
-            disabled={disabled || item.disabled}
+            disabled={item.disabled}
           />
-          <div className="ml-1 inline-block text-sm text-gray-600">
-            {item.name}
-          </div>
+          {card ? (
+            <div className="mt-px space-y-2 break-all">
+              <div className="text-sm text-gray-800">{item.name}</div>
+              <div className="text-xs text-gray-400">{item.description}</div>
+            </div>
+          ) : (
+            <span className="ml-6 text-gray-600">{item.name}</span>
+          )}
         </label>
       ))}
     </div>
