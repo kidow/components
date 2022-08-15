@@ -26,7 +26,7 @@ interface State {
 const Tooltip: FC<Props> = ({
   content,
   children,
-  border = false,
+  border = true,
   theme = 'light',
   arrow = true,
   position,
@@ -67,7 +67,7 @@ const Tooltip: FC<Props> = ({
   const trigger = cloneElement(child, {
     ...props,
     className: 'inline-block',
-    onMouseOver: throttle((e: MouseEvent) => {
+    onMouseEnter: throttle((e: MouseEvent) => {
       const element = e.target as HTMLElement
       const { height, width, top, left } = element.getBoundingClientRect()
       setState({
@@ -78,7 +78,7 @@ const Tooltip: FC<Props> = ({
         triggerWidth: width
       })
     }, 100),
-    onMouseOut: throttle(() => resetState(), 100)
+    onMouseLeave: throttle(() => resetState(), 100)
   })
 
   const left: number = useMemo(() => {

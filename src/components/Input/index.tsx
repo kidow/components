@@ -102,7 +102,7 @@ const Input: FC<Props> = ({
           <label
             htmlFor={props.id || id}
             className={classnames(
-              'absolute -top-6 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-gray-600 transition-all peer-placeholder-shown:text-gray-400 peer-empty:left-3 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-gray-600',
+              'absolute -top-6 left-0 max-w-[calc(100%-24px)] cursor-text select-none truncate text-gray-600 transition-all peer-placeholder-shown:text-gray-400 peer-focus:left-0 peer-focus:max-w-full peer-focus:cursor-default peer-focus:text-gray-600',
               !!props.value ? 'left-0' : 'left-3',
               {
                 'text-xs peer-placeholder-shown:left-1 peer-placeholder-shown:top-1.5 peer-placeholder-shown:text-xs peer-focus:-top-5 peer-focus:text-xs':

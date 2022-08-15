@@ -39,12 +39,12 @@ function Radio<T>({
           <input
             type="radio"
             className={classnames(
-              'cursor-pointer appearance-none before:absolute before:rounded-full before:border before:p-2 disabled:cursor-not-allowed',
+              'cursor-pointer appearance-none before:absolute before:rounded-full before:border before:bg-white before:p-2 disabled:cursor-not-allowed',
               card
                 ? 'before:left-2 before:top-2'
                 : 'before:left-0 before:top-[3px]',
               {
-                'after:absolute after:h-2.5 after:w-2.5 after:rounded-full after:bg-blue-500':
+                'before:border-blue-500 after:absolute after:h-2.5 after:w-2.5 after:rounded-full after:bg-blue-500':
                   value === item.value,
                 'after:left-3 after:top-3': card && value === item.value,
                 'after:left-1 after:top-[7px]': !card && value === item.value
