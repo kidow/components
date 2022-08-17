@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import type { ChangeEvent, RefObject } from 'react'
+import type { ChangeEvent, RefObject, ForwardedRef } from 'react'
 
 export function useObjectState<T>(
   initialObject: T
@@ -131,4 +131,22 @@ export const usePagination = ({
   }, [totalCount, pageSize, currentPage])
 
   return paginationRange
+}
+
+export function useCombinedRefs<T>(
+  ...refs: (RefObject<T> | ForwardedRef<T>)[]
+): RefObject<T> {
+  const targetRef = useRef<T>(null)
+
+  useEffect(() => {
+    refs.forEach((ref) => {
+      if (!ref) return
+
+      if (typeof ref === 'function') ref(targetRef.current)
+      // @ts-ignore
+      else ref.current = targetRef.current
+    })
+  }, [refs])
+
+  return targetRef
 }
