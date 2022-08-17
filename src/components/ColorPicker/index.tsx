@@ -124,12 +124,12 @@ const ColorPicker: FC<Props> = ({ value, onChange }) => {
                   }}
                 />
               </div>
-              <div className="flex h-7.5 text-xs">
-                <span className="flex w-15 select-none items-center justify-center bg-slate-100 text-slate-400">
+              <div className="flex h-[30px] text-xs">
+                <span className="flex w-[60px] select-none items-center justify-center bg-slate-100 text-slate-400">
                   HEX
                 </span>
                 <input
-                  className="w-full flex-1 bg-slate-50 px-3 text-slate-600"
+                  className="w-full flex-1 bg-slate-50 px-3 text-slate-600 focus:outline-none"
                   spellCheck={false}
                   value={value}
                   name="hex"
@@ -139,8 +139,8 @@ const ColorPicker: FC<Props> = ({ value, onChange }) => {
                   }}
                 />
               </div>
-              <div className="flex h-7.5 text-xs">
-                <span className="flex w-15 select-none items-center justify-center bg-slate-100 text-slate-400">
+              <div className="flex h-[30px] text-xs">
+                <span className="flex w-[60px] select-none items-center justify-center bg-slate-100 text-slate-400">
                   RGB
                 </span>
                 <div className="flex flex-1 gap-1 bg-slate-50 px-3">

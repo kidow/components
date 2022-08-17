@@ -9,7 +9,7 @@ interface State {}
 const RGB: FC<Props> = ({ value, onChange }) => {
   return (
     <input
-      className="w-6 bg-slate-50 text-right text-slate-600"
+      className="w-6 bg-slate-50 text-right text-slate-600 focus:outline-none"
       value={value}
       type="number"
       onChange={(e) => {
