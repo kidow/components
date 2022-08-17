@@ -4,7 +4,6 @@ import { hexToRgb, rgbToHex, useObjectState, useOnClickOutside } from 'services'
 import { createPortal } from 'react-dom'
 import classnames from 'classnames'
 import { ChevronDownIcon } from '@heroicons/react/outline'
-import './index.css'
 
 import Spectrum from './Spectrum'
 import Hue from './Hue'
