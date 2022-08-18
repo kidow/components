@@ -32,9 +32,6 @@ export default {
       control: { type: 'text' },
       defaultValue: '01012345678'
     },
-    float: {
-      control: { type: 'boolean' }
-    },
     value: {
       control: { type: 'text' }
     },

@@ -44,6 +44,7 @@ const InputCountryCode: FC<Props> = ({ onCodeChange, ...props }) => {
       <div ref={ref} className="inline-block">
         <Input
           {...props}
+          float={false}
           prefix={
             <div className="flex items-center gap-0.5">
               <button
