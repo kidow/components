@@ -101,9 +101,9 @@ const ColorPicker: FC<Props> = ({ value, onChange }) => {
             style={{
               top:
                 window.scrollY +
-                (buttonRef.current?.getBoundingClientRect().top || 0) +
-                48,
-              left: buttonRef.current?.getBoundingClientRect().left || 0
+                buttonRef.current!.getBoundingClientRect().top +
+                buttonRef.current!.clientHeight,
+              left: buttonRef.current!.getBoundingClientRect().left
             }}
           >
             <div className="space-y-2">

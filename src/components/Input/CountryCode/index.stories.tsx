@@ -30,19 +30,20 @@ export default {
     },
     placeholder: {
       control: { type: 'text' },
-      defaultValue: '플레이스홀더'
+      defaultValue: '01012345678'
     },
     float: {
       control: { type: 'boolean' }
     },
     value: {
       control: { type: 'text' }
+    },
+    onCodeChange: {
+      action: 'onCodeChange'
     }
   }
 } as ComponentMeta<typeof Component>
 
-export const Default: ComponentStory<typeof Component> = ({ ...props }) => (
-  <div className="mt-4">
-    <Component {...props} />
-  </div>
+export const CountryCode: ComponentStory<typeof Component> = ({ ...props }) => (
+  <Component {...props} />
 )

@@ -99,12 +99,11 @@ const DatePicker: FC<Props> = ({ onChange, format = 'YYYY.MM.DD', value }) => {
           <div
             role="presentation"
             style={{
-              left: `${ref.current?.getBoundingClientRect().left || 0}px`,
-              top: `${
+              left: ref.current!.getBoundingClientRect().left,
+              top:
                 window.scrollY +
-                (ref.current?.getBoundingClientRect().top || 0) +
-                40
-              }px`,
+                ref.current!.getBoundingClientRect().top +
+                ref.current!.clientHeight,
               position: 'absolute',
               zIndex: '9999'
             }}
