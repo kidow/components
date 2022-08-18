@@ -83,10 +83,10 @@ const ColorPicker: FC<Props> = ({ value, onChange }) => {
         id={id}
         ref={buttonRef}
         onClick={() => setState({ isOpen: !isOpen })}
-        className="flex items-center gap-3 rounded border border-gray-300 p-1.5"
+        className="flex items-center gap-3 rounded border border-gray-300 p-2"
       >
         <div className="h-6 w-6" style={{ backgroundColor: value }} />
-        <div className="text-sm font-semibold text-slate-700">{value}</div>
+        <div className="w-16 text-sm font-semibold text-slate-700">{value}</div>
         <ChevronDownIcon
           className={classnames('h-4 w-4 text-slate-400 duration-150', {
             'rotate-180': isOpen
@@ -102,7 +102,7 @@ const ColorPicker: FC<Props> = ({ value, onChange }) => {
               top:
                 window.scrollY +
                 (buttonRef.current?.getBoundingClientRect().top || 0) +
-                42,
+                48,
               left: buttonRef.current?.getBoundingClientRect().left || 0
             }}
           >

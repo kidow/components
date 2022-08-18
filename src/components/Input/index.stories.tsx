@@ -34,6 +34,9 @@ export default {
     },
     float: {
       control: { type: 'boolean' }
+    },
+    value: {
+      control: { type: 'text' }
     }
   }
 } as ComponentMeta<typeof Component>
