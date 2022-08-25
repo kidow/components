@@ -25,10 +25,10 @@ const Checkbox: FC<Props> = ({
         disabled ? 'cursor-not-allowed' : 'cursor-pointer',
         {
           'inline-flex items-center': !!label,
-          'gap-1': size === 'sm',
-          'gap-1.5': size === 'md',
-          'gap-2': size === 'lg',
-          'gap-2.5': size === 'xl'
+          'gap-1': !!label && size === 'sm',
+          'gap-1.5': !!label && size === 'md',
+          'gap-2': !!label && size === 'lg',
+          'gap-2.5': !!label && size === 'xl'
         }
       )}
     >
@@ -69,7 +69,8 @@ const Checkbox: FC<Props> = ({
             'before:h-1 before:w-3.5':
               !checked && indeterminate && size === 'xl',
             'before:absolute before:border-white': checked || indeterminate,
-            'bg-blue-500': !disabled && (checked || indeterminate),
+            'border-blue-500 bg-blue-500':
+              !disabled && (checked || indeterminate),
             'bg-white': !checked && !indeterminate,
             'bg-neutral-400': disabled && checked
           }

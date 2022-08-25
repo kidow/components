@@ -111,7 +111,7 @@ const Rating: FC<Props> = ({
         if (first) first.style.color = ACTIVE_COLOR
       }
     }
-  }, [value])
+  }, [])
   return (
     <ul
       role="radiogroup"

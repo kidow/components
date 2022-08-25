@@ -29,7 +29,7 @@ const Button: FC<Props> = ({
       className={classnames(
         'select-none border font-medium leading-6 transition duration-150 ease-in-out disabled:cursor-not-allowed',
         size === 'xs' ? 'gap-1.5 rounded py-px px-2 text-xs' : 'rounded-md',
-        shape === 'outlined' ? 'group' : 'border-transparent',
+        shape === 'outlined' ? 'group bg-white' : 'border-transparent',
         {
           'inline-flex items-center justify-center': loading,
           'hover:brightness-105 active:brightness-90': !loading && !disabled,

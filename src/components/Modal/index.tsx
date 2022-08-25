@@ -53,7 +53,7 @@ const Modal: FC<Props> = ({
       aria-modal="true"
       role="dialog"
     >
-      <div className="flex min-h-screen items-end justify-center p-0 text-center md:block">
+      <div className="flex min-h-screen items-center justify-center p-0 text-center md:block">
         <div
           className="fixed inset-0 bg-black opacity-30 transition-opacity"
           aria-hidden="true"
@@ -67,11 +67,11 @@ const Modal: FC<Props> = ({
         </span>
         <div
           className={classnames(
-            `my-8 inline-block w-full transform overflow-hidden rounded-lg text-left align-middle shadow-xl transition-all`,
+            `my-8 inline-block w-full transform overflow-hidden rounded-lg bg-white text-left align-middle shadow-xl transition-all`,
             maxWidth
           )}
         >
-          <header className="border-t-4 border-gray-800 bg-white">
+          <header className="border-t-4 border-gray-800">
             {!!title && (
               <div
                 className={classnames(
@@ -95,15 +95,13 @@ const Modal: FC<Props> = ({
             )}
           </header>
           <div
-            className={classnames('bg-white', {
+            className={classnames({
               'py-6 px-7': padding
             })}
           >
             {children}
           </div>
-          {footer && (
-            <footer className="border-t bg-white py-4 px-7">{footer}</footer>
-          )}
+          {footer && <footer className="border-t py-4 px-7">{footer}</footer>}
         </div>
       </div>
     </div>,

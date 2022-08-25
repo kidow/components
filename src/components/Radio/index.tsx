@@ -47,7 +47,8 @@ function Radio<T>({
                 'before:border-blue-500 after:absolute after:h-2.5 after:w-2.5 after:rounded-full after:bg-blue-500':
                   value === item.value,
                 'after:left-3 after:top-3': card && value === item.value,
-                'after:left-1 after:top-[7px]': !card && value === item.value
+                'before:border-blue-500 after:left-1 after:top-[7px]':
+                  !card && value === item.value
               }
             )}
             checked={value === item.value}
