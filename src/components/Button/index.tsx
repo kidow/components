@@ -61,7 +61,8 @@ const Button: FC<Props> = ({
           'border-red-500 text-red-500 hover:bg-red-500':
             theme === 'danger' && shape === 'outlined',
           'border-emerald-500 text-emerald-500 hover:bg-emerald-500':
-            theme === 'success' && shape === 'outlined'
+            theme === 'success' && shape === 'outlined',
+          'cursor-progress': loading
         },
         className
       )}
