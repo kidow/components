@@ -3,9 +3,9 @@ import classnames from 'classnames'
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   InformationCircleIcon
-} from '@heroicons/react/solid'
+} from '@heroicons/react/24/solid'
 
 export interface Props {
   type?: 'success' | 'info' | 'warn' | 'danger'
@@ -37,7 +37,7 @@ const Notice: FC<Props> = ({ type, content, caption }) => {
         <InformationCircleIcon className="h-5 w-5 text-blue-500" />
       )}
       {type === 'warn' && (
-        <ExclamationIcon className="h-5 w-5 text-amber-500" />
+        <ExclamationTriangleIcon className="h-5 w-5 text-amber-500" />
       )}
       {type === 'danger' && (
         <ExclamationCircleIcon className="h-5 w-5 text-red-500" />

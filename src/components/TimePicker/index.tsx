@@ -3,7 +3,7 @@ import type { FC } from 'react'
 import classnames from 'classnames'
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'
-import { ClockIcon } from '@heroicons/react/outline'
+import { ClockIcon } from '@heroicons/react/24/outline'
 import { twoDigitsNumber, useObjectState, useOnClickOutside } from 'services'
 import 'dayjs/locale/ko'
 

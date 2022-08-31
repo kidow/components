@@ -1,4 +1,4 @@
-import { useRef, useMemo, useId } from 'react'
+import { useRef, useId } from 'react'
 import type { FC } from 'react'
 import { useObjectState, useOnClickOutside } from 'services'
 import { createPortal } from 'react-dom'

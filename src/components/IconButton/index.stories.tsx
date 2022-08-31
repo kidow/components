@@ -3,9 +3,9 @@ import type { ComponentMeta, ComponentStory } from '@storybook/react'
 import {
   MinusIcon,
   PlusIcon,
-  SearchIcon,
-  UploadIcon
-} from '@heroicons/react/outline'
+  MagnifyingGlassIcon,
+  ArrowUpOnSquareIcon
+} from '@heroicons/react/24/outline'
 
 export default {
   title: 'Inputs',
@@ -26,10 +26,10 @@ export const IconButton: ComponentStory<typeof Component> = ({ ...props }) => (
       <MinusIcon />
     </Component>
     <Component {...props}>
-      <UploadIcon />
+      <ArrowUpOnSquareIcon />
     </Component>
     <Component {...props}>
-      <SearchIcon />
+      <MagnifyingGlassIcon />
     </Component>
   </div>
 )

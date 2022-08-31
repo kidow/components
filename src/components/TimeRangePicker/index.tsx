@@ -1,4 +1,4 @@
-import { XCircleIcon } from '@heroicons/react/solid'
+import { XCircleIcon } from '@heroicons/react/24/solid'
 import { Button } from 'components'
 import classnames from 'classnames'
 import { useEffect, useRef, useId } from 'react'

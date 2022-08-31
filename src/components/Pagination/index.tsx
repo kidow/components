@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { usePagination } from 'services'
 import classnames from 'classnames'
-import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/solid'
+import { ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/solid'
 
 export interface Props {
   currentPage: number

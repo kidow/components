@@ -1,11 +1,11 @@
 import React, { FC } from 'react'
 import {
-  SearchIcon,
+  MagnifyingGlassIcon,
   ClipboardIcon,
-  ChatIcon,
+  ChatBubbleOvalLeftEllipsisIcon,
   UserIcon
-} from '@heroicons/react/outline'
-import { HomeIcon } from '@heroicons/react/solid'
+} from '@heroicons/react/24/outline'
+import { HomeIcon } from '@heroicons/react/24/solid'
 
 interface Props {}
 
@@ -38,7 +38,7 @@ const Navigation: FC<Props> = () => {
           </button>
         </li>
         <li className="flex flex-1 flex-col items-center py-1">
-          <SearchIcon className="h-6 w-6" />
+          <MagnifyingGlassIcon className="h-6 w-6" />
           <div>Search</div>
         </li>
         <li className="flex flex-1 flex-col items-center py-1">
@@ -46,7 +46,7 @@ const Navigation: FC<Props> = () => {
           <div>Feed</div>
         </li>
         <li className="flex flex-1 flex-col items-center py-1">
-          <ChatIcon className="h-6 w-6" />
+          <ChatBubbleOvalLeftEllipsisIcon className="h-6 w-6" />
           <div>Chat</div>
         </li>
         <li className="flex flex-1 flex-col items-center py-1">

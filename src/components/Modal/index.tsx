@@ -1,5 +1,5 @@
 import type { FC, ReactNode } from 'react'
-import { XIcon } from '@heroicons/react/solid'
+import { XMarkIcon } from '@heroicons/react/24/solid'
 import classnames from 'classnames'
 import { createPortal } from 'react-dom'
 
@@ -89,7 +89,7 @@ const Modal: FC<Props> = ({
                   onClick={onClose}
                   className="rounded-full p-2 hover:bg-gray-300"
                 >
-                  <XIcon className="h-5 w-5 text-gray-800" />
+                  <XMarkIcon className="h-5 w-5 text-gray-800" />
                 </button>
               </div>
             )}

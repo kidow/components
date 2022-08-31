@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import classnames from 'classnames'
-import { UserCircleIcon } from '@heroicons/react/solid'
+import { UserCircleIcon } from '@heroicons/react/24/solid'
 
 interface Props {
   src?: string

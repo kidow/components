@@ -4,10 +4,10 @@ import classnames from 'classnames'
 import {
   CheckCircleIcon,
   ExclamationCircleIcon,
-  ExclamationIcon,
+  ExclamationTriangleIcon,
   InformationCircleIcon,
-  XIcon
-} from '@heroicons/react/solid'
+  XMarkIcon
+} from '@heroicons/react/24/solid'
 
 import ToastContainer from './Container'
 import ToastWrapper from './Wrapper'
@@ -66,7 +66,7 @@ const Toast: FC<Props> = ({
                 <InformationCircleIcon className="h-6 w-6 text-blue-500" />
               )}
               {type === 'warn' && (
-                <ExclamationIcon className="h-6 w-6 text-amber-500" />
+                <ExclamationTriangleIcon className="h-6 w-6 text-amber-500" />
               )}
               {type === 'error' && (
                 <ExclamationCircleIcon className="h-6 w-6 text-red-500" />
@@ -76,7 +76,7 @@ const Toast: FC<Props> = ({
           </div>
         </div>
         <button>
-          <XIcon className="h-4 w-4 text-neutral-400" />
+          <XMarkIcon className="h-4 w-4 text-neutral-400" />
         </button>
       </div>
       {autoClose && (

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import type { FC } from 'react'
 import classnames from 'classnames'
-import { ExclamationCircleIcon, XIcon } from '@heroicons/react/outline'
+import { ExclamationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useObjectState } from 'services'
 
 export interface Props extends ReactProps {
@@ -53,7 +53,7 @@ const Alert: FC<Props> = ({ type, message, close = true, children }) => {
         </div>
       </div>
       {close && !isClosed && (
-        <XIcon
+        <XMarkIcon
           onClick={() => setState({ isClosed: true })}
           className="h-5 w-5 cursor-pointer text-gray-700"
         />

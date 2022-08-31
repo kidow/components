@@ -5,12 +5,12 @@ import {
   CalendarIcon,
   ChevronLeftIcon,
   ChevronRightIcon
-} from '@heroicons/react/outline'
+} from '@heroicons/react/24/outline'
 import {
   ChevronDoubleLeftIcon,
   ChevronDoubleRightIcon,
   XCircleIcon
-} from '@heroicons/react/solid'
+} from '@heroicons/react/24/solid'
 import { useObjectState, useOnClickOutside } from 'services'
 import dayjs from 'dayjs'
 import type { Dayjs } from 'dayjs'

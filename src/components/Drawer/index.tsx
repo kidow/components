@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import classnames from 'classnames'
-import { XIcon } from '@heroicons/react/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { createPortal } from 'react-dom'
 
 interface Props extends ReactProps {
@@ -63,7 +63,7 @@ const Drawer: FC<Props> = ({ position, isOpen, onClose, children }) => {
             onClick={onClose}
             className="absolute right-4 top-4 inline-block sm:hidden"
           >
-            <XIcon className="h-5 w-5" />
+            <XMarkIcon className="h-5 w-5" />
           </button>
         </div>
       </div>

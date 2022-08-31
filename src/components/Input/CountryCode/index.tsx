@@ -4,7 +4,7 @@ import { Input } from 'components'
 import useSWR from 'swr/immutable'
 import { useObjectState, useOnClickOutside } from 'services'
 import { createPortal } from 'react-dom'
-import { ChevronDownIcon } from '@heroicons/react/solid'
+import { ChevronDownIcon } from '@heroicons/react/24/solid'
 import classnames from 'classnames'
 
 export interface Props extends ComponentProps<typeof Input> {

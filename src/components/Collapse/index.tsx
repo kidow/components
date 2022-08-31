@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react'
 import classnames from 'classnames'
 import { useObjectState } from 'services'
-import { ChevronDownIcon } from '@heroicons/react/outline'
+import { ChevronDownIcon } from '@heroicons/react/24/outline'
 
 interface Props {
   list: Array<{
