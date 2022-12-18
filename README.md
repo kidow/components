@@ -1,4 +1,4 @@
-# Subdomain Project - [Components](https://components.kidow.me)
+# Subdomain Project - [Components](https://components-legacy.kidow.me) (Legacy)
 
 > - [archive.kidow.me](https://github.com/kidow/archive)
 > - [blog.kidow.me](https://github.com/kidow/blog)

@@ -11,7 +11,6 @@ interface State {
 const Hue = forwardRef<HTMLCanvasElement, Props>(({ onChange }, ref) => {
   const [{ y }, setState] = useObjectState<State>({ y: 0 })
   const canvasRef = useRef<HTMLCanvasElement>(null)
-  canvasRef.current
   const combinedRef = useCombinedRefs<HTMLCanvasElement>(ref, canvasRef)
 
   const onMouseDown = (e: MouseEvent) => {
